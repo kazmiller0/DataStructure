@@ -4,20 +4,18 @@
 
 using namespace std;
 
-struct SqList
-{
+struct SqList {
     int data[MaxSize];
     int length;
 };
 
-struct SeqList
-{
-    int *data;
+struct SeqList {
+    int* data;
     int length;
     int maxSize;
 };
 
-void InitList(SqList &L)
+void InitList(SqList& L)
 {
     for (int i = 0; i < L.length; i++)
         L.data[i] = 0;
@@ -25,16 +23,16 @@ void InitList(SqList &L)
     L.length = 0;
 }
 
-void InitList(SeqList &L)
+void InitList(SeqList& L)
 {
     L.data = new int[InitSize];
     L.length = 0;
     L.maxSize = InitSize;
 }
 
-void IncreaseSize(SeqList &L, int len)
+void IncreaseSize(SeqList& L, int len)
 {
-    int *p = L.data;
+    int* p = L.data;
     L.data = new int[MaxSize + len];
 
     for (int i = 0; i < L.length; i++)
@@ -46,7 +44,7 @@ void IncreaseSize(SeqList &L, int len)
 
 //  插入线性表 i 位置相当于插入到数组的 i-1 位置
 //  插入位置可以是 1 到 length + 1
-bool ListInsert(SqList &L, int i, int e)
+bool ListInsert(SqList& L, int i, int e)
 {
     if (i < 1 || i > L.length + 1)
         return false;
@@ -63,7 +61,7 @@ bool ListInsert(SqList &L, int i, int e)
     return true;
 }
 
-bool ListDelete(SqList &L, int i, int &e)
+bool ListDelete(SqList& L, int i, int& e)
 {
     if (i < 1 || i > L.length)
         return false;
@@ -79,29 +77,23 @@ bool ListDelete(SqList &L, int i, int &e)
 
 int LocateElem(SqList L, int e)
 {
-    for (int i = 0; i < L.length; i++)
-    {
+    for (int i = 0; i < L.length; i++) {
         if (L.data[i] == e)
             return i;
     }
     return -1;
 }
 
-int GetElem(SqList L, int i)
-{
-    return L.data[i - 1];
-}
+int GetElem(SqList L, int i) { return L.data[i - 1]; }
 
-bool DeleteMin(SqList &L, int &e)
+bool DeleteMin(SqList& L, int& e)
 {
     if (L.length == 0)
         return false;
 
     e = L.data[0];
-    for (int i = 1; i < L.length; i++)
-    {
-        if (L.data[i] < e)
-        {
+    for (int i = 1; i < L.length; i++) {
+        if (L.data[i] < e) {
             e = L.data[i];
             L.data[i] = L.data[L.length - 1];
         }
@@ -110,24 +102,21 @@ bool DeleteMin(SqList &L, int &e)
     return true;
 }
 
-void Reverse(SqList &L)
+void Reverse(SqList& L)
 {
     int temp = 0;
-    for (int i = 0; i < L.length / 2; ++i)
-    {
+    for (int i = 0; i < L.length / 2; ++i) {
         temp = L.data[i];
         L.data[i] = L.data[L.length - 1 - i];
         L.data[L.length - 1 - i] = temp;
     }
 }
 
-void DeleteX(SqList &L, int x)
+void DeleteX(SqList& L, int x)
 {
     int k = 0;
-    for (int i = 0; i < L.length; ++i)
-    {
-        if (L.data[i] != x)
-        {
+    for (int i = 0; i < L.length; ++i) {
+        if (L.data[i] != x) {
             L.data[k] = L.data[i];
             k++;
         }
@@ -136,7 +125,7 @@ void DeleteX(SqList &L, int x)
 }
 
 //  删除值为 s 到 t 的元素
-bool DeleteS2T(SqList &L, int s, int t)
+bool DeleteS2T(SqList& L, int s, int t)
 {
     if (s >= t)
         return false;
@@ -145,10 +134,8 @@ bool DeleteS2T(SqList &L, int s, int t)
         return false;
 
     int k = 0;
-    for (int i = 0; i < L.length; ++i)
-    {
-        if (L.data[i] < s || L.data[i] > t)
-        {
+    for (int i = 0; i < L.length; ++i) {
+        if (L.data[i] < s || L.data[i] > t) {
             L.data[k] = L.data[i];
             k++;
         }
@@ -158,21 +145,6 @@ bool DeleteS2T(SqList &L, int s, int t)
 }
 
 //  删除重复的元素
-bool DeleteDuplicate(SqList &L)
+bool DeleteDuplicate(SqList& L)
 {
-
-}
-
-int main()
-{
-    int e = 0;
-    SqList L{};
-    ListInsert(L, 1, 5);
-    ListInsert(L, 1, 1);
-    ListInsert(L, 1, 2);
-    ListInsert(L, 1, 3);
-    ListInsert(L, 1, 4);
-    DeleteS2T(L, 1, 3);
-    Reverse(L);
-    return 0;
 }
