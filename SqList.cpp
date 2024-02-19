@@ -140,7 +140,7 @@ bool DeleteS2T(SqList& L, int s, int t)
             k++;
         }
     }
-    L.length = k;
+    L.length = k;   
     return true;
 }
 

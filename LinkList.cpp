@@ -145,6 +145,45 @@ void ListDeleteX(LinkList &L, int x)
     }
 }
 
+void ListDeleteMin(LinkList &L)
+{
+    LNode *min = L->next;
+    LNode *minPrev = L;
+    LNode *p = L;
+    LNode *q = L->next;
+    while (q != nullptr)
+    {
+        if (q->data < min->data)
+        {
+            min = q;
+            minPrev = p;
+        }
+        else
+        {
+            p = p->next;
+            q = q->next;
+        }
+    }
+    minPrev->next = min->next;
+    delete (min);
+}
+
+void Reverse(LinkList &L)
+{
+    LNode *prev = nullptr;
+    LNode *curr = L->next;
+    LNode *next = L->next->next;
+
+    while (next != nullptr)
+    {
+        curr->next = prev;
+        prev = curr;
+        curr = next;
+        next = next->next;
+    }
+    L->next = curr;
+}
+
 LinkList TailInsert(LinkList &L)
 {
     int x;
@@ -168,10 +207,10 @@ int main()
 {
     LinkList L;
     InitList(L);
-    ListInsert(L, 1, 2);
-    ListInsert(L, 1, 2);
     ListInsert(L, 1, 1);
     ListInsert(L, 1, 2);
-    ListInsert(L, 1, 1);
-    ListDeleteX(L, 2);
+    ListInsert(L, 1, 3);
+    ListInsert(L, 1, 4);
+    ListInsert(L, 1, 5);
+    Reverse(L);
 }
